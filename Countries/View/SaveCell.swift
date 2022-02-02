@@ -19,7 +19,6 @@ class SaveCell: UICollectionViewCell {
     
     var buttonIsSelected: Bool? {
         didSet {
-            favoriteButton.addTarget(self, action: #selector(deleteSavedItem), for: .touchUpInside)
             if buttonIsSelected == true {
                 favoriteButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
             } else {
@@ -30,7 +29,7 @@ class SaveCell: UICollectionViewCell {
    
     var coreDataVM: CoreDataViewModel?
     var coreDetailVM: CoreDetailViewModel?
-    
+        
     var row: Int = 0
     var selectedId = UUID()
     
@@ -39,10 +38,10 @@ class SaveCell: UICollectionViewCell {
 
         setCell()
     }
-   
+
     @objc func deleteSavedItem() {
         buttonIsSelected = false
-       
+              
         CoreDataManager.shared.deleteCountry(chosenId: selectedId) { viewModel in
             self.coreDetailVM = viewModel
             self.coreDataVM?.nameArray.remove(at: row)
@@ -53,7 +52,7 @@ class SaveCell: UICollectionViewCell {
                         
             NotificationCenter.default.post(name: NSNotification.Name("deletedData"), object: nil)
         }
-        
+ 
     }
     
     
@@ -82,6 +81,7 @@ class SaveCell: UICollectionViewCell {
         favoriteButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
         favoriteButton.alpha = 0.5
         favoriteButton.tintColor = .black
+        favoriteButton.addTarget(self, action: #selector(deleteSavedItem), for: .touchUpInside)
       
     }
    

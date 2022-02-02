@@ -19,7 +19,6 @@ class HomeCell: UICollectionViewCell {
     
     var buttonIsSelected: Bool? {
         didSet {
-            favoriteButton.addTarget(self, action: #selector(changeButtonFunc), for: .touchUpInside)
             if buttonIsSelected == true {
                 favoriteButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
             } else {
@@ -119,6 +118,8 @@ class HomeCell: UICollectionViewCell {
         favoriteButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
         favoriteButton.alpha = 0.5
         favoriteButton.tintColor = .black
+        favoriteButton.addTarget(self, action: #selector(changeButtonFunc), for: .touchUpInside)
+
 
         completion()
     }

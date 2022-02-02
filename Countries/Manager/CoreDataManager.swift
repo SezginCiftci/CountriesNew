@@ -76,12 +76,13 @@ struct CoreDataManager {
                             viewModel.imageArray.append(UIImage(named: "placeholder")!)
                         }
                     }
-                    completion(viewModel)
+               
                 }
             }
+            completion(viewModel)
             
         } catch {
-            
+            completion(viewModel)
         }
         
     }

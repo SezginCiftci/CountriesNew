@@ -10,7 +10,7 @@ import CoreData
 
 
 class SavedViewController: UITabBarController {
-          
+    
     var savedCV : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -37,17 +37,16 @@ class SavedViewController: UITabBarController {
         NotificationCenter.default.addObserver(self, selector: #selector(loadSavedData), name: NSNotification.Name(rawValue: "newData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(loadSavedData), name: NSNotification.Name(rawValue: "deletedData"), object: nil)
     }
- 
+    
     @objc private func loadSavedData() {
         
-            CoreDataManager.shared.loadData { viewModel in
-                DispatchQueue.main.async {
-                    self.coreVm = viewModel
-                    self.savedCV.reloadData()
-                }
+        CoreDataManager.shared.loadData { viewModel in
+            DispatchQueue.main.async {
+                self.coreVm = viewModel
+                self.savedCV.reloadData()
             }
+        }
     }
-    
     
     private func setupUI() {
         
